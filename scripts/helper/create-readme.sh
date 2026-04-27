@@ -56,22 +56,24 @@ if [ -f "$readme_path" ] && [ "$force" = false ]; then
   exit 1
 fi
 
-cat > "$readme_path" << EOF
-# $project_name
+cat > "$readme_path" << 'EOF'
+# README
 
-This project aims to: ...
+This repository provides infrastructure for the project to _[Briefly describe the aims and context of the analysis or research project here.]_
 
-## Contact details
+## Contact
 
-<!-- Add contact details here -->
+For more information, please contact:  
+- [Name], [Email Address]  
+- [Name], [Email Address]
 
 ## Links
 
-<!-- Add relevant links here -->
+- [URLs to data sources (e.g. OneDrive), GitHub repositories, publications, etc.]
 
 ## Details
 
-<!-- Add additional details here -->
+[Methods, timeline, team, data sources, software/tools, etc.]
 EOF
 
 echo "Created $readme_path"
