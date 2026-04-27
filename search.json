@@ -1,0 +1,121 @@
+[
+  {
+    "objectID": "install.html",
+    "href": "install.html",
+    "title": "Installation",
+    "section": "",
+    "text": "You can install infra as a system package (Ubuntu/Debian, macOS, Windows), from source, or as a language-specific wrapper (R or Python)."
+  },
+  {
+    "objectID": "install.html#ubuntu-debian",
+    "href": "install.html#ubuntu-debian",
+    "title": "Installation",
+    "section": "Ubuntu / Debian",
+    "text": "Ubuntu / Debian\n\nOption 1: Install from APT Repository (Recommended)\nInstall and keep infra up to date directly via apt:\n# Add repository signing key\ncurl -fsSL https://raw.githubusercontent.com/MiguelRodo/apt-miguelrodo/main/KEY.gpg \\\n   | sudo gpg --dearmor -o /usr/share/keyrings/miguelrodo-infra.gpg\n\n# Add apt source\necho \"deb [signed-by=/usr/share/keyrings/miguelrodo-infra.gpg] https://raw.githubusercontent.com/MiguelRodo/apt-miguelrodo/main/ ./\" \\\n   | sudo tee /etc/apt/sources.list.d/miguelrodo-infra.list &gt;/dev/null\n\n# Install infra\nsudo apt-get update\nsudo apt-get install -y infra\nTo uninstall:\nsudo apt-get remove infra\n\n\nOption 2: Local Installation (No sudo required)\nInstall to your user directory (~/.local/bin):\ngit clone https://github.com/MiguelRodo/infra.git\ncd infra\nbash install-local.sh\nIf ~/.local/bin is not on your PATH, add this to ~/.bashrc or ~/.profile:\nexport PATH=\"$HOME/.local/bin:$PATH\"\nThen reload:\nsource ~/.bashrc\nTo uninstall:\nbash uninstall-local.sh\n\n\nOption 3: System-wide from Release .deb (requires sudo)\nDownload and install the latest .deb from the Releases page:\nVERSION_INFRA=1.0.0\nwget https://github.com/MiguelRodo/infra/releases/download/v${VERSION_INFRA}/infra_${VERSION_INFRA}_all.deb\nsudo dpkg -i infra_${VERSION_INFRA}_all.deb\nrm infra_${VERSION_INFRA}_all.deb\n\n# Fix any dependency issues\nsudo apt-get install -f\nTo uninstall:\nsudo dpkg -r infra\n\n\nDependencies\nAll Ubuntu/Debian methods require bash, curl, and jq. These are typically pre-installed. If not:\nsudo apt-get install bash curl jq"
+  },
+  {
+    "objectID": "install.html#macos-homebrew",
+    "href": "install.html#macos-homebrew",
+    "title": "Installation",
+    "section": "macOS (Homebrew)",
+    "text": "macOS (Homebrew)\nbrew tap MiguelRodo/infra\nbrew install infra\nThe formula automatically handles the jq dependency."
+  },
+  {
+    "objectID": "install.html#windows",
+    "href": "install.html#windows",
+    "title": "Installation",
+    "section": "Windows",
+    "text": "Windows\n\nScoop (recommended)\nscoop bucket add infra https://github.com/MiguelRodo/scoop-bucket\nscoop install infra\ngit and jq are installed automatically by Scoop. You will also need Git for Windows for Bash support.\n\n\nManual\n\nClone the repository:\ngit clone https://github.com/MiguelRodo/infra.git\ncd infra\nRun the installer:\n.\\install.ps1\nRestart your PowerShell session.\n\nDependencies:\n\nGit for Windows — provides bash, git, and curl\njq — JSON processor"
+  },
+  {
+    "objectID": "install.html#from-source",
+    "href": "install.html#from-source",
+    "title": "Installation",
+    "section": "From Source",
+    "text": "From Source\ngit clone https://github.com/MiguelRodo/infra.git\ncd infra\n\n# Local install (no sudo)\nbash install-local.sh\n\n# Or system-wide on Ubuntu/Debian\nsudo dpkg-buildpackage -us -uc -b\nsudo dpkg -i ../infra_*.deb"
+  },
+  {
+    "objectID": "install.html#language-wrappers",
+    "href": "install.html#language-wrappers",
+    "title": "Installation",
+    "section": "Language Wrappers",
+    "text": "Language Wrappers\n\nR Package\ninstall.packages(\"devtools\")\ndevtools::install_github(\"MiguelRodo/infra\")\nRequires bash, curl, and jq on your system.\n\n\nPython Package\npip install git+https://github.com/MiguelRodo/infra.git\nOr from a local clone:\ngit clone https://github.com/MiguelRodo/infra.git\ncd infra\npip install .\nRequires bash, curl, and jq on your system. On Windows, use Git for Windows or WSL."
+  },
+  {
+    "objectID": "install.html#verify-installation",
+    "href": "install.html#verify-installation",
+    "title": "Installation",
+    "section": "Verify Installation",
+    "text": "Verify Installation\ninfra --help"
+  },
+  {
+    "objectID": "reference.html",
+    "href": "reference.html",
+    "title": "Reference",
+    "section": "",
+    "text": "Set up project infrastructure in the specified directory.\nUsage: infra setup [OPTIONS] [DIRECTORY]\n\nOptions:\n  --type TYPE         Project type: single or compendium (default: single)\n  --image TYPE        Devcontainer image type: bioconductor, rocker, or python\n                      (default: bioconductor)\n  --add-gha           Add prebuild-devcontainer GitHub Actions workflow\n  --install-repos     Install the MiguelRodo/repos utility\n  --no-readme         Skip creating README.md\n  --no-repos-list     Skip creating repos.list\n  --force             Overwrite existing files\n  --name NAME         Project name for README (default: directory basename)\n  --prebuild-tag TAG  Pre-built image tag to use (default: fetch latest from GitHub)\n  -h, --help          Show this help message\n\n\n# Set up current directory with defaults (BioConductor devcontainer, single repo)\ninfra setup .\n\n# Compendium with Python devcontainer and GHA prebuild workflow\ninfra setup --type compendium --image python --add-gha .\n\n# Rocker verse devcontainer, also install repos utility\ninfra setup --image rocker --install-repos ~/my-project\n\n# Overwrite existing files\ninfra setup --force .\n\n\n\n\n\n\n\n\n\n\nFile\nDescription\n\n\n\n\nREADME.md\nProject README with aim, contact, links, details sections\n\n\nrepos.list\nRepository list for use with repos clone\n\n\n.devcontainer/devcontainer.json\nBuild-based devcontainer (uses local Dockerfile)\n\n\n.devcontainer/Dockerfile\nDockerfile for the chosen image type\n\n\n.devcontainer/prebuild/devcontainer.json\nPre-built image devcontainer\n\n\n.devcontainer/renv/.gitkeep\nrenv cache placeholder (R images only)\n\n\n.github/workflows/prebuild-devcontainer.yml\nGHA workflow (if --add-gha specified)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nBase image\nR support\nrenv cache\n\n\n\n\nbioconductor\nbioconductor/bioconductor_docker:RELEASE_3_21-r-4.5.2\n✓\n✓\n\n\nrocker\nrocker/verse:latest\n✓\n✓\n\n\npython\npython:3.12-slim\n✗\n✗"
+  },
+  {
+    "objectID": "reference.html#infra-setup",
+    "href": "reference.html#infra-setup",
+    "title": "Reference",
+    "section": "",
+    "text": "Set up project infrastructure in the specified directory.\nUsage: infra setup [OPTIONS] [DIRECTORY]\n\nOptions:\n  --type TYPE         Project type: single or compendium (default: single)\n  --image TYPE        Devcontainer image type: bioconductor, rocker, or python\n                      (default: bioconductor)\n  --add-gha           Add prebuild-devcontainer GitHub Actions workflow\n  --install-repos     Install the MiguelRodo/repos utility\n  --no-readme         Skip creating README.md\n  --no-repos-list     Skip creating repos.list\n  --force             Overwrite existing files\n  --name NAME         Project name for README (default: directory basename)\n  --prebuild-tag TAG  Pre-built image tag to use (default: fetch latest from GitHub)\n  -h, --help          Show this help message\n\n\n# Set up current directory with defaults (BioConductor devcontainer, single repo)\ninfra setup .\n\n# Compendium with Python devcontainer and GHA prebuild workflow\ninfra setup --type compendium --image python --add-gha .\n\n# Rocker verse devcontainer, also install repos utility\ninfra setup --image rocker --install-repos ~/my-project\n\n# Overwrite existing files\ninfra setup --force .\n\n\n\n\n\n\n\n\n\n\nFile\nDescription\n\n\n\n\nREADME.md\nProject README with aim, contact, links, details sections\n\n\nrepos.list\nRepository list for use with repos clone\n\n\n.devcontainer/devcontainer.json\nBuild-based devcontainer (uses local Dockerfile)\n\n\n.devcontainer/Dockerfile\nDockerfile for the chosen image type\n\n\n.devcontainer/prebuild/devcontainer.json\nPre-built image devcontainer\n\n\n.devcontainer/renv/.gitkeep\nrenv cache placeholder (R images only)\n\n\n.github/workflows/prebuild-devcontainer.yml\nGHA workflow (if --add-gha specified)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nBase image\nR support\nrenv cache\n\n\n\n\nbioconductor\nbioconductor/bioconductor_docker:RELEASE_3_21-r-4.5.2\n✓\n✓\n\n\nrocker\nrocker/verse:latest\n✓\n✓\n\n\npython\npython:3.12-slim\n✗\n✗"
+  },
+  {
+    "objectID": "reference.html#infra-install-repos",
+    "href": "reference.html#infra-install-repos",
+    "title": "Reference",
+    "section": "infra install-repos",
+    "text": "infra install-repos\nInstall the MiguelRodo/repos multi-repository management utility in an OS-appropriate manner.\nUsage: infra install-repos [OPTIONS]\n\nOptions:\n  --force     Re-install even if already installed\n  -h, --help  Show this help message\n\nExamples\ninfra install-repos\ninfra install-repos --force"
+  },
+  {
+    "objectID": "reference.html#global-options",
+    "href": "reference.html#global-options",
+    "title": "Reference",
+    "section": "Global options",
+    "text": "Global options\ninfra --help      Show help\ninfra --version   Show version\ninfra -h          Alias for --help\ninfra -V          Alias for --version"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "infra",
+    "section": "",
+    "text": "Set up standard project infrastructure — devcontainers, README templates, and repository lists — for both individual repositories and multi-repo compendia, with a single command."
+  },
+  {
+    "objectID": "index.html#quick-start",
+    "href": "index.html#quick-start",
+    "title": "infra",
+    "section": "Quick Start",
+    "text": "Quick Start\n# Set up the current directory with defaults (BioConductor devcontainer)\ninfra setup .\n\n# Python devcontainer with a GHA prebuild workflow\ninfra setup --image python --add-gha .\n\n# Multi-repo compendium with Rocker devcontainer, also install repos utility\ninfra setup --type compendium --image rocker --install-repos ."
+  },
+  {
+    "objectID": "index.html#what-does-infra-setup-create",
+    "href": "index.html#what-does-infra-setup-create",
+    "title": "infra",
+    "section": "What does infra setup create?",
+    "text": "What does infra setup create?\n\n\n\n\n\n\n\nFile\nDescription\n\n\n\n\nREADME.md\nProject README with aim, contact, links, and details sections\n\n\nrepos.list\nRepository list for use with repos clone\n\n\n.devcontainer/devcontainer.json\nBuild-based devcontainer (uses local Dockerfile)\n\n\n.devcontainer/Dockerfile\nDockerfile for the chosen image type\n\n\n.devcontainer/prebuild/devcontainer.json\nPre-built image devcontainer\n\n\n.devcontainer/renv/.gitkeep\nrenv cache placeholder (R images only)\n\n\n.github/workflows/prebuild-devcontainer.yml\nGHA workflow (if --add-gha specified)"
+  },
+  {
+    "objectID": "index.html#devcontainer-image-types",
+    "href": "index.html#devcontainer-image-types",
+    "title": "infra",
+    "section": "Devcontainer Image Types",
+    "text": "Devcontainer Image Types\n\n\n\n\n\n\n\n\n\nType\nBase Image\nR support\nrenv cache\n\n\n\n\nbioconductor\nbioconductor/bioconductor_docker:RELEASE_3_21-r-4.5.2\n✓\n✓\n\n\nrocker\nrocker/verse:latest\n✓\n✓\n\n\npython\npython:3.12-slim\n✗\n✗"
+  },
+  {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "infra",
+    "section": "Installation",
+    "text": "Installation\n→ Installation guide"
+  },
+  {
+    "objectID": "index.html#command-reference",
+    "href": "index.html#command-reference",
+    "title": "infra",
+    "section": "Command Reference",
+    "text": "Command Reference\n→ Reference"
+  }
+]
