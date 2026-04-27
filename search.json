@@ -1,5 +1,33 @@
 [
   {
+    "objectID": "reference.html",
+    "href": "reference.html",
+    "title": "Reference",
+    "section": "",
+    "text": "Set up project infrastructure in the specified directory.\nUsage: infra setup [OPTIONS] [DIRECTORY]\n\nOptions:\n  --type TYPE         Project type: single or compendium (default: single)\n  --image TYPE        Devcontainer image type: bioconductor, rocker, or python\n                      (default: bioconductor)\n  --add-gha           Add prebuild-devcontainer GitHub Actions workflow\n  --install-repos     Install the MiguelRodo/repos utility\n  --no-readme         Skip creating README.md\n  --no-repos-list     Skip creating repos.list\n  --force             Overwrite existing files\n  --name NAME         Project name for README (default: directory basename)\n  --prebuild-tag TAG  Pre-built image tag to use (default: fetch latest from GitHub)\n  -h, --help          Show this help message\n\n\n# Set up current directory with defaults (BioConductor devcontainer, single repo)\ninfra setup .\n\n# Compendium with Python devcontainer and GHA prebuild workflow\ninfra setup --type compendium --image python --add-gha .\n\n# Rocker verse devcontainer, also install repos utility\ninfra setup --image rocker --install-repos ~/my-project\n\n# Overwrite existing files\ninfra setup --force .\n\n\n\n\n\n\n\n\n\n\nFile\nDescription\n\n\n\n\nREADME.md\nProject README with aim, contact, links, details sections\n\n\nrepos.list\nRepository list for use with repos clone\n\n\n.devcontainer/devcontainer.json\nBuild-based devcontainer (uses local Dockerfile)\n\n\n.devcontainer/Dockerfile\nDockerfile for the chosen image type\n\n\n.devcontainer/prebuild/devcontainer.json\nPre-built image devcontainer\n\n\n.devcontainer/renv/.gitkeep\nrenv cache placeholder (R images only)\n\n\n.github/workflows/prebuild-devcontainer.yml\nGHA workflow (if --add-gha specified)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nBase image\nR support\nrenv cache\n\n\n\n\nbioconductor\nbioconductor/bioconductor_docker:RELEASE_3_21-r-4.5.2\n✓\n✓\n\n\nrocker\nrocker/verse:latest\n✓\n✓\n\n\npython\npython:3.12-slim\n✗\n✗"
+  },
+  {
+    "objectID": "reference.html#infra-setup",
+    "href": "reference.html#infra-setup",
+    "title": "Reference",
+    "section": "",
+    "text": "Set up project infrastructure in the specified directory.\nUsage: infra setup [OPTIONS] [DIRECTORY]\n\nOptions:\n  --type TYPE         Project type: single or compendium (default: single)\n  --image TYPE        Devcontainer image type: bioconductor, rocker, or python\n                      (default: bioconductor)\n  --add-gha           Add prebuild-devcontainer GitHub Actions workflow\n  --install-repos     Install the MiguelRodo/repos utility\n  --no-readme         Skip creating README.md\n  --no-repos-list     Skip creating repos.list\n  --force             Overwrite existing files\n  --name NAME         Project name for README (default: directory basename)\n  --prebuild-tag TAG  Pre-built image tag to use (default: fetch latest from GitHub)\n  -h, --help          Show this help message\n\n\n# Set up current directory with defaults (BioConductor devcontainer, single repo)\ninfra setup .\n\n# Compendium with Python devcontainer and GHA prebuild workflow\ninfra setup --type compendium --image python --add-gha .\n\n# Rocker verse devcontainer, also install repos utility\ninfra setup --image rocker --install-repos ~/my-project\n\n# Overwrite existing files\ninfra setup --force .\n\n\n\n\n\n\n\n\n\n\nFile\nDescription\n\n\n\n\nREADME.md\nProject README with aim, contact, links, details sections\n\n\nrepos.list\nRepository list for use with repos clone\n\n\n.devcontainer/devcontainer.json\nBuild-based devcontainer (uses local Dockerfile)\n\n\n.devcontainer/Dockerfile\nDockerfile for the chosen image type\n\n\n.devcontainer/prebuild/devcontainer.json\nPre-built image devcontainer\n\n\n.devcontainer/renv/.gitkeep\nrenv cache placeholder (R images only)\n\n\n.github/workflows/prebuild-devcontainer.yml\nGHA workflow (if --add-gha specified)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nBase image\nR support\nrenv cache\n\n\n\n\nbioconductor\nbioconductor/bioconductor_docker:RELEASE_3_21-r-4.5.2\n✓\n✓\n\n\nrocker\nrocker/verse:latest\n✓\n✓\n\n\npython\npython:3.12-slim\n✗\n✗"
+  },
+  {
+    "objectID": "reference.html#infra-install-repos",
+    "href": "reference.html#infra-install-repos",
+    "title": "Reference",
+    "section": "infra install-repos",
+    "text": "infra install-repos\nInstall the MiguelRodo/repos multi-repository management utility in an OS-appropriate manner.\nUsage: infra install-repos [OPTIONS]\n\nOptions:\n  --force     Re-install even if already installed\n  -h, --help  Show this help message\n\nExamples\ninfra install-repos\ninfra install-repos --force"
+  },
+  {
+    "objectID": "reference.html#global-options",
+    "href": "reference.html#global-options",
+    "title": "Reference",
+    "section": "Global options",
+    "text": "Global options\ninfra --help      Show help\ninfra --version   Show version\ninfra -h          Alias for --help\ninfra -V          Alias for --version"
+  },
+  {
     "objectID": "install.html",
     "href": "install.html",
     "title": "Installation",
@@ -47,34 +75,6 @@
     "title": "Installation",
     "section": "Verify Installation",
     "text": "Verify Installation\ninfra --help"
-  },
-  {
-    "objectID": "reference.html",
-    "href": "reference.html",
-    "title": "Reference",
-    "section": "",
-    "text": "Set up project infrastructure in the specified directory.\nUsage: infra setup [OPTIONS] [DIRECTORY]\n\nOptions:\n  --type TYPE         Project type: single or compendium (default: single)\n  --image TYPE        Devcontainer image type: bioconductor, rocker, or python\n                      (default: bioconductor)\n  --add-gha           Add prebuild-devcontainer GitHub Actions workflow\n  --install-repos     Install the MiguelRodo/repos utility\n  --no-readme         Skip creating README.md\n  --no-repos-list     Skip creating repos.list\n  --force             Overwrite existing files\n  --name NAME         Project name for README (default: directory basename)\n  --prebuild-tag TAG  Pre-built image tag to use (default: fetch latest from GitHub)\n  -h, --help          Show this help message\n\n\n# Set up current directory with defaults (BioConductor devcontainer, single repo)\ninfra setup .\n\n# Compendium with Python devcontainer and GHA prebuild workflow\ninfra setup --type compendium --image python --add-gha .\n\n# Rocker verse devcontainer, also install repos utility\ninfra setup --image rocker --install-repos ~/my-project\n\n# Overwrite existing files\ninfra setup --force .\n\n\n\n\n\n\n\n\n\n\nFile\nDescription\n\n\n\n\nREADME.md\nProject README with aim, contact, links, details sections\n\n\nrepos.list\nRepository list for use with repos clone\n\n\n.devcontainer/devcontainer.json\nBuild-based devcontainer (uses local Dockerfile)\n\n\n.devcontainer/Dockerfile\nDockerfile for the chosen image type\n\n\n.devcontainer/prebuild/devcontainer.json\nPre-built image devcontainer\n\n\n.devcontainer/renv/.gitkeep\nrenv cache placeholder (R images only)\n\n\n.github/workflows/prebuild-devcontainer.yml\nGHA workflow (if --add-gha specified)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nBase image\nR support\nrenv cache\n\n\n\n\nbioconductor\nbioconductor/bioconductor_docker:RELEASE_3_21-r-4.5.2\n✓\n✓\n\n\nrocker\nrocker/verse:latest\n✓\n✓\n\n\npython\npython:3.12-slim\n✗\n✗"
-  },
-  {
-    "objectID": "reference.html#infra-setup",
-    "href": "reference.html#infra-setup",
-    "title": "Reference",
-    "section": "",
-    "text": "Set up project infrastructure in the specified directory.\nUsage: infra setup [OPTIONS] [DIRECTORY]\n\nOptions:\n  --type TYPE         Project type: single or compendium (default: single)\n  --image TYPE        Devcontainer image type: bioconductor, rocker, or python\n                      (default: bioconductor)\n  --add-gha           Add prebuild-devcontainer GitHub Actions workflow\n  --install-repos     Install the MiguelRodo/repos utility\n  --no-readme         Skip creating README.md\n  --no-repos-list     Skip creating repos.list\n  --force             Overwrite existing files\n  --name NAME         Project name for README (default: directory basename)\n  --prebuild-tag TAG  Pre-built image tag to use (default: fetch latest from GitHub)\n  -h, --help          Show this help message\n\n\n# Set up current directory with defaults (BioConductor devcontainer, single repo)\ninfra setup .\n\n# Compendium with Python devcontainer and GHA prebuild workflow\ninfra setup --type compendium --image python --add-gha .\n\n# Rocker verse devcontainer, also install repos utility\ninfra setup --image rocker --install-repos ~/my-project\n\n# Overwrite existing files\ninfra setup --force .\n\n\n\n\n\n\n\n\n\n\nFile\nDescription\n\n\n\n\nREADME.md\nProject README with aim, contact, links, details sections\n\n\nrepos.list\nRepository list for use with repos clone\n\n\n.devcontainer/devcontainer.json\nBuild-based devcontainer (uses local Dockerfile)\n\n\n.devcontainer/Dockerfile\nDockerfile for the chosen image type\n\n\n.devcontainer/prebuild/devcontainer.json\nPre-built image devcontainer\n\n\n.devcontainer/renv/.gitkeep\nrenv cache placeholder (R images only)\n\n\n.github/workflows/prebuild-devcontainer.yml\nGHA workflow (if --add-gha specified)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nBase image\nR support\nrenv cache\n\n\n\n\nbioconductor\nbioconductor/bioconductor_docker:RELEASE_3_21-r-4.5.2\n✓\n✓\n\n\nrocker\nrocker/verse:latest\n✓\n✓\n\n\npython\npython:3.12-slim\n✗\n✗"
-  },
-  {
-    "objectID": "reference.html#infra-install-repos",
-    "href": "reference.html#infra-install-repos",
-    "title": "Reference",
-    "section": "infra install-repos",
-    "text": "infra install-repos\nInstall the MiguelRodo/repos multi-repository management utility in an OS-appropriate manner.\nUsage: infra install-repos [OPTIONS]\n\nOptions:\n  --force     Re-install even if already installed\n  -h, --help  Show this help message\n\nExamples\ninfra install-repos\ninfra install-repos --force"
-  },
-  {
-    "objectID": "reference.html#global-options",
-    "href": "reference.html#global-options",
-    "title": "Reference",
-    "section": "Global options",
-    "text": "Global options\ninfra --help      Show help\ninfra --version   Show version\ninfra -h          Alias for --help\ninfra -V          Alias for --version"
   },
   {
     "objectID": "index.html",
