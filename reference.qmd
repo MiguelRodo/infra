@@ -1,0 +1,94 @@
+---
+title: "Reference"
+toc: true
+---
+
+## `infra setup`
+
+Set up project infrastructure in the specified directory.
+
+```
+Usage: infra setup [OPTIONS] [DIRECTORY]
+
+Options:
+  --type TYPE         Project type: single or compendium (default: single)
+  --image TYPE        Devcontainer image type: bioconductor, rocker, or python
+                      (default: bioconductor)
+  --add-gha           Add prebuild-devcontainer GitHub Actions workflow
+  --install-repos     Install the MiguelRodo/repos utility
+  --no-readme         Skip creating README.md
+  --no-repos-list     Skip creating repos.list
+  --force             Overwrite existing files
+  --name NAME         Project name for README (default: directory basename)
+  --prebuild-tag TAG  Pre-built image tag to use (default: fetch latest from GitHub)
+  -h, --help          Show this help message
+```
+
+### Examples
+
+```bash
+# Set up current directory with defaults (BioConductor devcontainer, single repo)
+infra setup .
+
+# Compendium with Python devcontainer and GHA prebuild workflow
+infra setup --type compendium --image python --add-gha .
+
+# Rocker verse devcontainer, also install repos utility
+infra setup --image rocker --install-repos ~/my-project
+
+# Overwrite existing files
+infra setup --force .
+```
+
+### Files created
+
+| File | Description |
+|------|-------------|
+| `README.md` | Project README with aim, contact, links, details sections |
+| `repos.list` | Repository list for use with `repos clone` |
+| `.devcontainer/devcontainer.json` | Build-based devcontainer (uses local Dockerfile) |
+| `.devcontainer/Dockerfile` | Dockerfile for the chosen image type |
+| `.devcontainer/prebuild/devcontainer.json` | Pre-built image devcontainer |
+| `.devcontainer/renv/.gitkeep` | renv cache placeholder (R images only) |
+| `.github/workflows/prebuild-devcontainer.yml` | GHA workflow (if `--add-gha` specified) |
+
+### Devcontainer image types
+
+| Type | Base image | R support | renv cache |
+|------|-----------|-----------|------------|
+| `bioconductor` | `bioconductor/bioconductor_docker:RELEASE_3_21-r-4.5.2` | ✓ | ✓ |
+| `rocker` | `rocker/verse:latest` | ✓ | ✓ |
+| `python` | `python:3.12-slim` | ✗ | ✗ |
+
+---
+
+## `infra install-repos`
+
+Install the [MiguelRodo/repos](https://github.com/MiguelRodo/repos)
+multi-repository management utility in an OS-appropriate manner.
+
+```
+Usage: infra install-repos [OPTIONS]
+
+Options:
+  --force     Re-install even if already installed
+  -h, --help  Show this help message
+```
+
+### Examples
+
+```bash
+infra install-repos
+infra install-repos --force
+```
+
+---
+
+## Global options
+
+```
+infra --help      Show help
+infra --version   Show version
+infra -h          Alias for --help
+infra -V          Alias for --version
+```

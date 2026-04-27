@@ -29,7 +29,7 @@ for dep in bash curl jq; do
   fi
 done
 
-if [ ${#MISSING_DEPS[@]} -gt 0 ]; then
+if [ "${#MISSING_DEPS[@]}" -gt 0 ]; then
   echo -e "${RED}Error: Missing required dependencies: ${MISSING_DEPS[*]}${NC}"
   echo "Please install them using:"
   echo "  sudo apt-get install ${MISSING_DEPS[*]}"
@@ -65,6 +65,7 @@ cat > "$LOCAL_BIN/infra" << 'WRAPPER_EOF'
 set -e
 
 SCRIPTS_DIR="$HOME/.local/share/infra/scripts"
+VERSION="1.0.0"
 
 usage() {
   cat <<EOF
@@ -91,6 +92,10 @@ fi
 case "$1" in
   -h|--help)
     usage
+    exit 0
+    ;;
+  --version|-V)
+    echo "$VERSION"
     exit 0
     ;;
   setup)

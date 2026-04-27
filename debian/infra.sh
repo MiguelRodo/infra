@@ -1,19 +1,10 @@
 #!/usr/bin/env bash
-# infra - Project infrastructure setup utility
-#
-# Dispatches subcommands to the appropriate scripts.
-# This file is the entry point used when running infra directly from
-# the repository root (e.g., bash bin/infra setup ...).
-# After installation via install-local.sh, the installed wrapper at
-# ~/.local/bin/infra points to the installed scripts directory.
+# infra - Project infrastructure setup utility wrapper
+# Dispatches subcommands to the appropriate script
 
 set -e
 
-# Resolve SCRIPTS_DIR relative to this script's location in bin/
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SCRIPTS_DIR="$(cd "$SCRIPT_DIR/../scripts" && pwd)"
-
-VERSION="1.0.0"
+SCRIPTS_DIR="/usr/share/infra/scripts"
 
 usage() {
   cat <<EOF
@@ -43,7 +34,7 @@ case "$1" in
     exit 0
     ;;
   --version|-V)
-    echo "$VERSION"
+    echo "1.0.0"
     exit 0
     ;;
   setup)

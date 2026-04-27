@@ -1,0 +1,188 @@
+---
+title: "Installation"
+toc: true
+---
+
+You can install `infra` as a system package (Ubuntu/Debian, macOS, Windows),
+from source, or as a language-specific wrapper (R or Python).
+
+## Ubuntu / Debian
+
+### Option 1: Install from APT Repository (Recommended)
+
+Install and keep `infra` up to date directly via `apt`:
+
+```bash
+# Add repository signing key
+curl -fsSL https://raw.githubusercontent.com/MiguelRodo/apt-miguelrodo/main/KEY.gpg \
+   | sudo gpg --dearmor -o /usr/share/keyrings/miguelrodo-infra.gpg
+
+# Add apt source
+echo "deb [signed-by=/usr/share/keyrings/miguelrodo-infra.gpg] https://raw.githubusercontent.com/MiguelRodo/apt-miguelrodo/main/ ./" \
+   | sudo tee /etc/apt/sources.list.d/miguelrodo-infra.list >/dev/null
+
+# Install infra
+sudo apt-get update
+sudo apt-get install -y infra
+```
+
+To uninstall:
+
+```bash
+sudo apt-get remove infra
+```
+
+### Option 2: Local Installation (No sudo required)
+
+Install to your user directory (`~/.local/bin`):
+
+```bash
+git clone https://github.com/MiguelRodo/infra.git
+cd infra
+bash install-local.sh
+```
+
+If `~/.local/bin` is not on your PATH, add this to `~/.bashrc` or `~/.profile`:
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+Then reload:
+
+```bash
+source ~/.bashrc
+```
+
+To uninstall:
+
+```bash
+bash uninstall-local.sh
+```
+
+### Option 3: System-wide from Release `.deb` (requires sudo)
+
+Download and install the latest `.deb` from the
+[Releases page](https://github.com/MiguelRodo/infra/releases):
+
+```bash
+VERSION_INFRA=1.0.0
+wget https://github.com/MiguelRodo/infra/releases/download/v${VERSION_INFRA}/infra_${VERSION_INFRA}_all.deb
+sudo dpkg -i infra_${VERSION_INFRA}_all.deb
+rm infra_${VERSION_INFRA}_all.deb
+
+# Fix any dependency issues
+sudo apt-get install -f
+```
+
+To uninstall:
+
+```bash
+sudo dpkg -r infra
+```
+
+### Dependencies
+
+All Ubuntu/Debian methods require `bash`, `curl`, and `jq`.  These are
+typically pre-installed.  If not:
+
+```bash
+sudo apt-get install bash curl jq
+```
+
+---
+
+## macOS (Homebrew)
+
+```bash
+brew tap MiguelRodo/infra
+brew install infra
+```
+
+The formula automatically handles the `jq` dependency.
+
+---
+
+## Windows
+
+### Scoop (recommended)
+
+```powershell
+scoop bucket add infra https://github.com/MiguelRodo/scoop-bucket
+scoop install infra
+```
+
+`git` and `jq` are installed automatically by Scoop. You will also need
+[Git for Windows](https://git-scm.com/download/win) for Bash support.
+
+### Manual
+
+1. Clone the repository:
+   ```powershell
+   git clone https://github.com/MiguelRodo/infra.git
+   cd infra
+   ```
+2. Run the installer:
+   ```powershell
+   .\install.ps1
+   ```
+3. Restart your PowerShell session.
+
+**Dependencies:**
+
+- [Git for Windows](https://git-scm.com/download/win) — provides `bash`, `git`, and `curl`
+- [jq](https://jqlang.github.io/jq/download/) — JSON processor
+
+---
+
+## From Source
+
+```bash
+git clone https://github.com/MiguelRodo/infra.git
+cd infra
+
+# Local install (no sudo)
+bash install-local.sh
+
+# Or system-wide on Ubuntu/Debian
+sudo dpkg-buildpackage -us -uc -b
+sudo dpkg -i ../infra_*.deb
+```
+
+---
+
+## Language Wrappers
+
+### R Package
+
+```r
+install.packages("devtools")
+devtools::install_github("MiguelRodo/infra")
+```
+
+Requires `bash`, `curl`, and `jq` on your system.
+
+### Python Package
+
+```bash
+pip install git+https://github.com/MiguelRodo/infra.git
+```
+
+Or from a local clone:
+
+```bash
+git clone https://github.com/MiguelRodo/infra.git
+cd infra
+pip install .
+```
+
+Requires `bash`, `curl`, and `jq` on your system.  On Windows, use
+[Git for Windows](https://git-scm.com/download/win) or WSL.
+
+---
+
+## Verify Installation
+
+```bash
+infra --help
+```

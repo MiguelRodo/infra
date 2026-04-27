@@ -1,0 +1,49 @@
+---
+title: "infra"
+toc: true
+---
+
+Set up standard project infrastructure — devcontainers, README templates, and
+repository lists — for both individual repositories and multi-repo compendia,
+with a single command.
+
+## Quick Start
+
+```bash
+# Set up the current directory with defaults (BioConductor devcontainer)
+infra setup .
+
+# Python devcontainer with a GHA prebuild workflow
+infra setup --image python --add-gha .
+
+# Multi-repo compendium with Rocker devcontainer, also install repos utility
+infra setup --type compendium --image rocker --install-repos .
+```
+
+## What does `infra setup` create?
+
+| File | Description |
+|------|-------------|
+| `README.md` | Project README with aim, contact, links, and details sections |
+| `repos.list` | Repository list for use with `repos clone` |
+| `.devcontainer/devcontainer.json` | Build-based devcontainer (uses local Dockerfile) |
+| `.devcontainer/Dockerfile` | Dockerfile for the chosen image type |
+| `.devcontainer/prebuild/devcontainer.json` | Pre-built image devcontainer |
+| `.devcontainer/renv/.gitkeep` | renv cache placeholder (R images only) |
+| `.github/workflows/prebuild-devcontainer.yml` | GHA workflow (if `--add-gha` specified) |
+
+## Devcontainer Image Types
+
+| Type | Base Image | R support | renv cache |
+|------|-----------|-----------|------------|
+| `bioconductor` | `bioconductor/bioconductor_docker:RELEASE_3_21-r-4.5.2` | ✓ | ✓ |
+| `rocker` | `rocker/verse:latest` | ✓ | ✓ |
+| `python` | `python:3.12-slim` | ✗ | ✗ |
+
+## Installation
+
+→ [Installation guide](install.html)
+
+## Command Reference
+
+→ [Reference](reference.html)

@@ -2,6 +2,8 @@
 
 A CLI utility for setting up standard project infrastructure, including devcontainers, README templates, and repository lists — for both individual repositories and multi-repo compendia.
 
+VERSION_INFRA=1.0.0
+
 ## Features
 
 - **Install [`repos`](https://github.com/MiguelRodo/repos)** — the multi-repository management utility, in an OS-appropriate way
@@ -12,7 +14,18 @@ A CLI utility for setting up standard project infrastructure, including devconta
 
 ## Installation
 
-### Linux / macOS
+### Ubuntu / Debian — APT (recommended)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/MiguelRodo/apt-miguelrodo/main/KEY.gpg \
+   | sudo gpg --dearmor -o /usr/share/keyrings/miguelrodo-infra.gpg
+echo "deb [signed-by=/usr/share/keyrings/miguelrodo-infra.gpg] https://raw.githubusercontent.com/MiguelRodo/apt-miguelrodo/main/ ./" \
+   | sudo tee /etc/apt/sources.list.d/miguelrodo-infra.list >/dev/null
+sudo apt-get update
+sudo apt-get install -y infra
+```
+
+### Linux / macOS — Local install (no sudo)
 
 ```bash
 git clone https://github.com/MiguelRodo/infra.git
@@ -27,12 +40,38 @@ export PATH="$HOME/.local/bin:$PATH"
 # Add the above line to ~/.bashrc or ~/.profile to persist it
 ```
 
-### Windows
+### macOS — Homebrew
+
+```bash
+brew tap MiguelRodo/infra
+brew install infra
+```
+
+### Windows — Scoop
+
+```powershell
+scoop bucket add infra https://github.com/MiguelRodo/scoop-bucket
+scoop install infra
+```
+
+### Windows — Manual
 
 ```powershell
 git clone https://github.com/MiguelRodo/infra.git
 cd infra
 pwsh install.ps1
+```
+
+### R package
+
+```r
+devtools::install_github("MiguelRodo/infra")
+```
+
+### Python package
+
+```bash
+pip install git+https://github.com/MiguelRodo/infra.git
 ```
 
 ## Usage
@@ -104,6 +143,10 @@ infra setup --force .
 - `bash` ≥ 3.2
 - `curl` — for downloading repos and fetching the latest devcontainer image tag
 - `jq` — for parsing GitHub API responses
+
+## Documentation
+
+Full documentation: <https://miguelrodo.github.io/infra/>
 
 ## License
 
