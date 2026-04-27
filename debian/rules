@@ -1,0 +1,27 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	# Install scripts and templates to /usr/share/infra/
+	install -d debian/infra/usr/share/infra
+	cp -r scripts debian/infra/usr/share/infra/
+	cp -r templates debian/infra/usr/share/infra/
+
+	# Make all shell scripts executable
+	find debian/infra/usr/share/infra/scripts -type f -name "*.sh" -exec chmod +x {} \;
+
+	# Install the wrapper script to /usr/bin/infra
+	install -d debian/infra/usr/bin
+	install -m 755 debian/infra.sh debian/infra/usr/bin/infra
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf debian/infra
+
+override_dh_auto_build:
+	# No build step needed
+
+override_dh_auto_test:
+	# No tests during package build

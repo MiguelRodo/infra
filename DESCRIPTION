@@ -1,0 +1,15 @@
+Package: infra
+Type: Package
+Title: Project Infrastructure Setup Utility
+Version: 1.0.0
+Authors@R: person("Miguel", "Rodo", email = "miguel.rodo@uct.ac.za", role = c("aut", "cre"))
+Description: A command-line tool for setting up standard project infrastructure,
+    including devcontainers, README templates, and repository lists — for both
+    individual repositories and multi-repo compendia.
+    Provides wrappers for Bash scripts that handle devcontainer generation,
+    README and repos.list template creation, and GitHub Actions workflow setup.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+SystemRequirements: bash, curl, jq
+RoxygenNote: 7.3.1
