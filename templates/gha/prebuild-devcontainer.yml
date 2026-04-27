@@ -1,0 +1,21 @@
+name: Pre-build Dev Container
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  prebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pre-build dev container
+        uses: MiguelRodo/actions/prebuild-devcontainer@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

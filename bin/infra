@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# infra - Project infrastructure setup utility
+#
+# Dispatches subcommands to the appropriate scripts.
+# This file is the entry point used when running infra directly from
+# the repository root (e.g., bash bin/infra setup ...).
+# After installation via install-local.sh, the installed wrapper at
+# ~/.local/bin/infra points to the installed scripts directory.
+
+set -e
+
+# Resolve SCRIPTS_DIR relative to this script's location in bin/
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPTS_DIR="$(cd "$SCRIPT_DIR/../scripts" && pwd)"
+
+usage() {
+  cat <<EOF
+Usage: infra <command> [options]
+
+Commands:
+  setup           Set up project infrastructure (README, repos.list, devcontainer)
+  install-repos   Install the MiguelRodo/repos utility
+
+Run 'infra <command> --help' for more information on a command.
+
+Examples:
+  infra setup .
+  infra setup --type compendium --image python --add-gha .
+  infra install-repos
+EOF
+}
+
+if [ $# -eq 0 ]; then
+  usage >&2
+  exit 1
+fi
+
+case "$1" in
+  -h|--help)
+    usage
+    exit 0
+    ;;
+  setup)
+    shift
+    exec bash "$SCRIPTS_DIR/setup.sh" "$@"
+    ;;
+  install-repos)
+    shift
+    exec bash "$SCRIPTS_DIR/install-repos.sh" "$@"
+    ;;
+  *)
+    echo "Error: unknown command '$1'" >&2
+    echo "" >&2
+    usage >&2
+    exit 1
+    ;;
+esac
