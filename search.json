@@ -28,6 +28,48 @@
     "text": "Global options\ninfra --help      Show help\ninfra --version   Show version\ninfra -h          Alias for --help\ninfra -V          Alias for --version"
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "infra",
+    "section": "",
+    "text": "Set up standard project infrastructure — devcontainers, README templates, and repository lists — for both individual repositories and multi-repo compendia, with a single command."
+  },
+  {
+    "objectID": "index.html#quick-start",
+    "href": "index.html#quick-start",
+    "title": "infra",
+    "section": "Quick Start",
+    "text": "Quick Start\n# Set up the current directory with defaults (BioConductor devcontainer)\ninfra setup .\n\n# Python devcontainer with a GHA prebuild workflow\ninfra setup --image python --add-gha .\n\n# Multi-repo compendium with Rocker devcontainer, also install repos utility\ninfra setup --type compendium --image rocker --install-repos ."
+  },
+  {
+    "objectID": "index.html#what-does-infra-setup-create",
+    "href": "index.html#what-does-infra-setup-create",
+    "title": "infra",
+    "section": "What does infra setup create?",
+    "text": "What does infra setup create?\n\n\n\n\n\n\n\nFile\nDescription\n\n\n\n\nREADME.md\nProject README with aim, contact, links, and details sections\n\n\nrepos.list\nRepository list for use with repos clone\n\n\n.devcontainer/devcontainer.json\nBuild-based devcontainer (uses local Dockerfile)\n\n\n.devcontainer/Dockerfile\nDockerfile for the chosen image type\n\n\n.devcontainer/prebuild/devcontainer.json\nPre-built image devcontainer\n\n\n.devcontainer/renv/.gitkeep\nrenv cache placeholder (R images only)\n\n\n.github/workflows/prebuild-devcontainer.yml\nGHA workflow (if --add-gha specified)"
+  },
+  {
+    "objectID": "index.html#devcontainer-image-types",
+    "href": "index.html#devcontainer-image-types",
+    "title": "infra",
+    "section": "Devcontainer Image Types",
+    "text": "Devcontainer Image Types\n\n\n\n\n\n\n\n\n\nType\nBase Image\nR support\nrenv cache\n\n\n\n\nbioconductor\nbioconductor/bioconductor_docker:RELEASE_3_21-r-4.5.2\n✓\n✓\n\n\nrocker\nrocker/verse:latest\n✓\n✓\n\n\npython\npython:3.12-slim\n✗\n✗"
+  },
+  {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "infra",
+    "section": "Installation",
+    "text": "Installation\n→ Installation guide"
+  },
+  {
+    "objectID": "index.html#command-reference",
+    "href": "index.html#command-reference",
+    "title": "infra",
+    "section": "Command Reference",
+    "text": "Command Reference\n→ Reference"
+  },
+  {
     "objectID": "install.html",
     "href": "install.html",
     "title": "Installation",
@@ -75,47 +117,5 @@
     "title": "Installation",
     "section": "Verify Installation",
     "text": "Verify Installation\ninfra --help"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "infra",
-    "section": "",
-    "text": "Set up standard project infrastructure — devcontainers, README templates, and repository lists — for both individual repositories and multi-repo compendia, with a single command."
-  },
-  {
-    "objectID": "index.html#quick-start",
-    "href": "index.html#quick-start",
-    "title": "infra",
-    "section": "Quick Start",
-    "text": "Quick Start\n# Set up the current directory with defaults (BioConductor devcontainer)\ninfra setup .\n\n# Python devcontainer with a GHA prebuild workflow\ninfra setup --image python --add-gha .\n\n# Multi-repo compendium with Rocker devcontainer, also install repos utility\ninfra setup --type compendium --image rocker --install-repos ."
-  },
-  {
-    "objectID": "index.html#what-does-infra-setup-create",
-    "href": "index.html#what-does-infra-setup-create",
-    "title": "infra",
-    "section": "What does infra setup create?",
-    "text": "What does infra setup create?\n\n\n\n\n\n\n\nFile\nDescription\n\n\n\n\nREADME.md\nProject README with aim, contact, links, and details sections\n\n\nrepos.list\nRepository list for use with repos clone\n\n\n.devcontainer/devcontainer.json\nBuild-based devcontainer (uses local Dockerfile)\n\n\n.devcontainer/Dockerfile\nDockerfile for the chosen image type\n\n\n.devcontainer/prebuild/devcontainer.json\nPre-built image devcontainer\n\n\n.devcontainer/renv/.gitkeep\nrenv cache placeholder (R images only)\n\n\n.github/workflows/prebuild-devcontainer.yml\nGHA workflow (if --add-gha specified)"
-  },
-  {
-    "objectID": "index.html#devcontainer-image-types",
-    "href": "index.html#devcontainer-image-types",
-    "title": "infra",
-    "section": "Devcontainer Image Types",
-    "text": "Devcontainer Image Types\n\n\n\n\n\n\n\n\n\nType\nBase Image\nR support\nrenv cache\n\n\n\n\nbioconductor\nbioconductor/bioconductor_docker:RELEASE_3_21-r-4.5.2\n✓\n✓\n\n\nrocker\nrocker/verse:latest\n✓\n✓\n\n\npython\npython:3.12-slim\n✗\n✗"
-  },
-  {
-    "objectID": "index.html#installation",
-    "href": "index.html#installation",
-    "title": "infra",
-    "section": "Installation",
-    "text": "Installation\n→ Installation guide"
-  },
-  {
-    "objectID": "index.html#command-reference",
-    "href": "index.html#command-reference",
-    "title": "infra",
-    "section": "Command Reference",
-    "text": "Command Reference\n→ Reference"
   }
 ]
